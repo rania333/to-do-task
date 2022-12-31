@@ -29,3 +29,11 @@ const PORT = process.env.PORT || 3000
 const server = app.listen(PORT, () => {
     console.log('app listen on port: ', PORT)
 })
+
+// To handle any error outside express
+process.on('unhandledRejection', (err) => {
+    console.error('unhandledRejection error', err.name, ' | ', err.message)
+    server.close(() => {
+        process.exit(1)
+    })
+})

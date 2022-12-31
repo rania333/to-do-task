@@ -1,5 +1,5 @@
 const express = require('express')
-const { addTaskController, updateTaskController, getAllTasksController } = require('../controllers/task.controller')
+const { addTaskController, updateTaskController } = require('../controllers/task.controller')
 const { addTaskValidator, updateTaskValidator } = require('../validations/task.validation')
 const router = express.Router()
 
@@ -7,6 +7,5 @@ const router = express.Router()
 router.route('/')
     .post(addTaskValidator, addTaskController)
     .put(updateTaskValidator, updateTaskController)
-    .get(getAllTasksController)
 
 module.exports = router

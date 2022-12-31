@@ -26,7 +26,7 @@ exports.updateTaskValidator = [
         .custom(async (val) => {
             await TaskModel.findById(val).then(task => {
                 if (!task) {
-                    return Promise.reject(new Error('This product not exist'))
+                    return Promise.reject(new Error('This task not exist'))
                 }
             }).catch(err => {
                 console.error(err)

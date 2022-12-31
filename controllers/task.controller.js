@@ -19,9 +19,11 @@ exports.updateTaskController = async (req, res, nxt) => {
     try {
         // Get data
         const taskDetails = req.body
-        console.log('test02', taskDetails)
         // Call task service
-        await task.updateTask(taskDetails)
+        const updatedTask = await task.updateTask(taskDetails)
+        if (!updatedTask) {
+            return nxt({ statusCode: 404, message: 'Task not found' })
+        }
 
         res.status(200).send({ message: 'task is updated successfully' })
     } catch (err) {
@@ -29,13 +31,3 @@ exports.updateTaskController = async (req, res, nxt) => {
     }
 }
 
-exports.getAllTasksController = async (req, res, nxt) => {
-    try {
-        // Call task service
-        const data = await task.getAllTask(1, req.query)
-
-        res.status(200).send({ message: 'tasks are retrieved successfully', data, count: data.length })
-    } catch (err) {
-        nxt(err)
-    }
-}
