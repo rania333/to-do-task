@@ -7,9 +7,25 @@ const app = express()
 // Connect to database
 dbConnection()
 
+// Global middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// get routes 
+const taskRoutes = require('./routes/task.route')
+app.use('/task', taskRoutes)
+
+// Error handler middleware
+app.use((err, req, res, next) => {
+    console.log("error >> ", err)
+    if (!err.statusCode) {
+        return res.status(500).send({ message: "Something went wrong" })
+    } else {
+        return res.status(err.statusCode).send({ message: err.message })
+    }
+})
 
 const PORT = process.env.PORT || 3000
-
 const server = app.listen(PORT, () => {
     console.log('app listen on port: ', PORT)
 })

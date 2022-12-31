@@ -7,12 +7,17 @@ const taskSchema = new mongoose.Schema(
             trim: true,
             required: [true, 'name required'],
         },
+        description: {
+            type: String,
+            trim: true,
+            min: 10
+        },
         status: {
             type: Boolean, // true for completed | false otherwise
             default: false,
         },
-        user: {
-            type: number,
+        userId: {
+            type: Number,
             lowercase: true,
         },
 
