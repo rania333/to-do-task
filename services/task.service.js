@@ -23,6 +23,11 @@ class Task {
         return userTask
     }
 
+    deleteTask = async (taskId) => {
+        const userTask = await TaskModel.findByIdAndRemove(taskId);
+        console.log(userTask)
+        return userTask
+    }
 
 }
 
