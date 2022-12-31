@@ -29,6 +29,20 @@ class Task {
         return userTask
     }
 
+
+    getAllTask = async (userId, paginationData) => {
+        // Extract data
+        const page = paginationData?.page || 1
+        const limit = paginationData?.limit || 5
+
+        const allUserTasks = await TaskModel.find({ userId },
+            { _id: 1, name: 1, description: 1, status: 1, userId: 1 })
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+        return allUserTasks
+    }
+
 }
 
 module.exports = Task

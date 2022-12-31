@@ -1,5 +1,5 @@
 const express = require('express')
-const { addTaskController, updateTaskController, getOneTaskController, deleteTaskController } = require('../controllers/task.controller')
+const { addTaskController, updateTaskController, getOneTaskController, deleteTaskController, getAllTasksController } = require('../controllers/task.controller')
 const { addTaskValidator, updateTaskValidator, specificTaskValidator, deleteTaskValidator } = require('../validations/task.validation')
 const router = express.Router()
 
@@ -10,5 +10,6 @@ router.route('/')
     .post(addTaskValidator, addTaskController)
     .put(updateTaskValidator, updateTaskController)
     .delete(deleteTaskValidator, deleteTaskController)
+    .get(getAllTasksController)
 
 module.exports = router

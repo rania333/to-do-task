@@ -64,3 +64,14 @@ exports.deleteTaskController = async (req, res, nxt) => {
     }
 }
 
+
+exports.getAllTasksController = async (req, res, nxt) => {
+    try {
+        // Call task service
+        const data = await task.getAllTask(1, req.query)
+
+        res.status(200).send({ message: 'tasks are retrieved successfully', data, count: data.length })
+    } catch (err) {
+        nxt(err)
+    }
+}
