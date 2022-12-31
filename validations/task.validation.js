@@ -49,3 +49,15 @@ exports.updateTaskValidator = [
 ];
 
 
+exports.specificTaskValidator = [
+    check('taskId')
+        .notEmpty()
+        .withMessage('Task ID is required')
+        .isLength({ min: 1 })
+        .withMessage('Too short task ID')
+    ,
+
+    validationMiddleware,
+];
+
+

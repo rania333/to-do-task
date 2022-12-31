@@ -14,8 +14,13 @@ class Task {
             { ...taskInfo },
             { new: true }
         )
+        return updatedTask
+    }
 
-        console.log('test>>', updatedTask)
+    getSpecificTask = async (userId, taskId) => {
+        const userTask = await TaskModel.find({ userId, _id: taskId },
+            { _id: 1, name: 1, description: 1, status: 1, userId: 1 })
+        return userTask
     }
 
 

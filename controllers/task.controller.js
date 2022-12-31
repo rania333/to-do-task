@@ -31,3 +31,20 @@ exports.updateTaskController = async (req, res, nxt) => {
     }
 }
 
+
+exports.getOneTaskController = async (req, res, nxt) => {
+    try {
+        // Get data
+        const { taskId } = req.params
+        // Call task service
+        const taskInfo = await task.getSpecificTask(1, taskId)
+        if (!taskInfo) {
+            return nxt({ statusCode: 404, message: 'Task not found' })
+        }
+
+        res.status(200).send({ message: 'task is retrieved successfully', data: taskInfo })
+    } catch (err) {
+        nxt(err)
+    }
+}
+
